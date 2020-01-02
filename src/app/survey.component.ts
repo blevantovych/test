@@ -1,8 +1,16 @@
-import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
-import * as Survey from 'survey-angular';
-import * as widgets from 'surveyjs-widgets';
-import * as SurveyPDF from 'survey-pdf';
-import 'inputmask/dist/inputmask/phone-codes/phone.js';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  OnInit,
+  SimpleChanges,
+  OnChanges
+} from "@angular/core";
+import * as Survey from "survey-angular";
+import * as widgets from "surveyjs-widgets";
+import * as SurveyPDF from "survey-pdf";
+import "inputmask/dist/inputmask/phone-codes/phone.js";
 
 widgets.icheck(Survey);
 widgets.select2(Survey);
@@ -19,47 +27,64 @@ widgets.bootstrapslider(Survey);
 widgets.prettycheckbox(Survey);
 //widgets.emotionsratings(Survey);
 
-Survey.JsonObject.metaData.addProperty('questionbase', 'popupdescription:text');
-Survey.JsonObject.metaData.addProperty('page', 'popupdescription:text');
+Survey.JsonObject.metaData.addProperty("questionbase", "popupdescription:text");
+Survey.JsonObject.metaData.addProperty("page", "popupdescription:text");
 
 Survey.StylesManager.applyTheme("default");
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'survey',
-  template: `<div class='survey-container contentcontainer codecontainer'><div id='surveyElement'></div><button (click)='savePDF()'>Save PDF</button></div>`
+  selector: "survey",
+  template: `
+    <div class="survey-container contentcontainer codecontainer">
+      <div id="surveyElement"></div>
+    </div>
+  `
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, OnChanges {
   @Output() submitSurvey = new EventEmitter<any>();
+  @Input() inputParams;
+  @Input() page;
   @Input()
   json: object;
   result: any;
+  surveyModel;
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.surveyModel)
+      this.surveyModel.currentPageNo = changes.page.currentValue - 1;
+  }
 
   ngOnInit() {
-    const surveyModel = new Survey.Model(this.json);
-    surveyModel.onAfterRenderQuestion.add((survey, options) => {
-      if (!options.question.popupdescription) { return; }
+    console.log(this.inputParams);
+
+    this.surveyModel = new Survey.Model(this.json);
+    this.surveyModel.data = {
+      ...this.inputParams
+    };
+    this.surveyModel.currentPageNo = this.page - 1;
+    this.surveyModel.onAfterRenderQuestion.add((survey, options) => {
+      if (!options.question.popupdescription) {
+        return;
+      }
       // Add a button;
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-info btn-xs';
-      btn.innerHTML = 'More Info';
-      btn.onclick = function () {
+      const btn = document.createElement("button");
+      btn.className = "btn btn-info btn-xs";
+      btn.innerHTML = "More Info";
+      btn.onclick = function() {
         // showDescription(question);
         alert(options.question.popupdescription);
       };
-      const header = options.htmlElement.querySelector('h5');
-      const span = document.createElement('span');
-      span.innerHTML = '  ';
+      const header = options.htmlElement.querySelector("h5");
+      const span = document.createElement("span");
+      span.innerHTML = "  ";
       header.appendChild(span);
       header.appendChild(btn);
     });
-    surveyModel.onComplete
-      .add((result, options) => {
-        this.submitSurvey.emit(result.data);
-        this.result = result.data;
-      }
-      );
-    Survey.SurveyNG.render('surveyElement', { model: surveyModel });
+    this.surveyModel.onComplete.add((result, options) => {
+      this.submitSurvey.emit(result.data);
+      this.result = result.data;
+    });
+    Survey.SurveyNG.render("surveyElement", { model: this.surveyModel });
   }
   savePDF() {
     var options = {

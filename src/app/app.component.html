@@ -1,4 +1,4 @@
-<h1>
+<!-- <h1>
   {{ title }}
 </h1>
 
@@ -11,4 +11,31 @@
   (surveySaved)="onSurveySaved($event)"
 ></survey-creator>
 
-<survey-analytics></survey-analytics>
+<survey-analytics></survey-analytics> -->
+<div style="display: flex; flex-direction: column; margin: 20px">
+  <a routerLink="/branching">
+    <span>1. Branching</span>
+  </a>
+  <a routerLink="/single-question">
+    <span>2. Single question</span>
+  </a>
+  <a routerLink="/multiple-questions">
+    <span>3. Multiple questions</span>
+  </a>
+  <a routerLink="/specific-question">
+    <span>5. Ability to go to specific question</span>
+  </a>
+  <a routerLink="/only-one-answer">
+    <span>6. Select only one answer</span>
+  </a>
+  <a routerLink="/capture-records">
+    <span>7. Capture records</span>
+  </a>
+  <a routerLink="/predefined-conditions">
+    <span>8. Predefined conditions</span>
+  </a>
+  <a routerLink="/input-parameters">
+    <span>9. Input parameters</span>
+  </a>
+</div>
+<router-outlet></router-outlet>
