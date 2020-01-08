@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "branching",
+  selector: "previous-question",
   template: `
     <survey [json]="json" (submitSurvey)="sendData($event)"></survey>
     <div style="margin-left: 130px">
@@ -12,11 +12,10 @@ import { Component } from "@angular/core";
         <p style="font-size: 15px">{{ r.answer }}</p>
       </div>
     </div>
-  `,
+  `
   // <pre *ngIf="results">{{ results | json }}</pre>
-  styleUrls: ["./branching.component.css"]
 })
-export class BranchingComponent {
+export class PreviousQuestionComponent {
   results = null;
 
   questions = [
@@ -62,8 +61,7 @@ export class BranchingComponent {
   json = {
     completedHtml: "",
     showCompletedPage: false,
-    title:
-      "1. Support of branching logic (if-then) dependent on the option (answer) user selects",
+    title: "4. Ability to move back to the previous question (1 step back)",
     showProgressBar: "top",
     pages: this.questions
   };

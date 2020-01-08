@@ -10,7 +10,8 @@ import { Component } from "@angular/core";
 export class OnlyOneAnswerComponent {
   title = "app works!";
   json = {
-    title: "Ability to select only one (exactly 1) of the alternative answers",
+    title:
+      "6. Ability to select only one (exactly 1) of the alternative answers",
     showProgressBar: "top",
     pages: [
       {

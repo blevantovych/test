@@ -19,7 +19,8 @@ import { Component } from "@angular/core";
 export class SpecificQuestionComponent {
   page = 3;
   json = {
-    title: `Ability to go directly to some specific question. If the new answer
+    clearInvisibleValues: "onHidden",
+    title: `5. Ability to go directly to some specific question. If the new answer
       changes the further workflow, the answers and product line journal records
       should be cleaned up.`,
     showProgressBar: "top",
@@ -29,8 +30,8 @@ export class SpecificQuestionComponent {
         elements: [
           {
             type: "boolean",
-            name: "question1",
-            title: "question 1"
+            name: "question1"
+            // title: "question 1"
           }
         ]
       },
@@ -39,7 +40,8 @@ export class SpecificQuestionComponent {
           {
             type: "boolean",
             name: "question2",
-            title: "question 2"
+            title: "question 2",
+            visibleIf: "{question1}"
           }
         ]
       },
@@ -48,7 +50,8 @@ export class SpecificQuestionComponent {
           {
             type: "boolean",
             name: "question3",
-            title: "question 3"
+            title: "question 3",
+            visibleIf: "{question2}"
           }
         ]
       },

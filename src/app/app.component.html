@@ -13,29 +13,35 @@
 
 <survey-analytics></survey-analytics> -->
 <div style="display: flex; flex-direction: column; margin: 20px">
-  <a routerLink="/branching">
+  <a routerLink="/branching" routerLinkActive="is-active">
     <span>1. Branching</span>
   </a>
-  <a routerLink="/single-question">
+  <a routerLink="/single-question" routerLinkActive="is-active">
     <span>2. Single question</span>
   </a>
-  <a routerLink="/multiple-questions">
+  <a routerLink="/multiple-questions" routerLinkActive="is-active">
     <span>3. Multiple questions</span>
   </a>
-  <a routerLink="/specific-question">
+  <a routerLink="/previous-question" routerLinkActive="is-active">
+    <span>4. Move back to the previous question</span>
+  </a>
+  <a routerLink="/specific-question" routerLinkActive="is-active">
     <span>5. Ability to go to specific question</span>
   </a>
-  <a routerLink="/only-one-answer">
+  <a routerLink="/only-one-answer" routerLinkActive="is-active">
     <span>6. Select only one answer</span>
   </a>
-  <a routerLink="/capture-records">
+  <a routerLink="/capture-records" routerLinkActive="is-active">
     <span>7. Capture records</span>
   </a>
-  <a routerLink="/predefined-conditions">
+  <!-- <a routerLink="/predefined-conditions" routerLinkActive="is-active">
     <span>8. Predefined conditions</span>
+  </a> -->
+  <a routerLink="/input-parameters" routerLinkActive="is-active">
+    <span>8, 9. Input parameters used in conditions</span>
   </a>
-  <a routerLink="/input-parameters">
-    <span>9. Input parameters</span>
-  </a>
+  <!-- <a routerLink="/change-styling" routerLinkActive="is-active">
+    <span>change styling</span>
+  </a> -->
 </div>
 <router-outlet></router-outlet>

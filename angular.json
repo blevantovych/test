@@ -16,12 +16,10 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ],
+            "assets": ["src/assets", "src/favicon.ico"],
             "styles": [
               "src/styles.css",
+              "src/modern.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/survey-angular/survey.css",
               "node_modules/survey-creator/survey-creator.css",
@@ -103,6 +101,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/modern.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/survey-angular/survey.css",
               "node_modules/survey-creator/survey-creator.css",
@@ -123,19 +122,13 @@
               "node_modules/jquery-bar-rating/dist/themes/bootstrap-stars.css",
               "node_modules/jquery-bar-rating/dist/themes/fontawesome-stars-o.css"
             ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ]
+            "assets": ["src/assets", "src/favicon.ico"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
             "exclude": []
           }
         }
@@ -156,9 +149,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": ["e2e/tsconfig.e2e.json"],
             "exclude": []
           }
         }

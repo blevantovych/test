@@ -10,7 +10,7 @@ import { Component } from "@angular/core";
 export class PredefinedConditionsComponent {
   title = "app works!";
   json = {
-    title: "Support of branching logic based on predefined conditions.",
+    title: "8. Support of branching logic based on predefined conditions.",
     showProgressBar: "top",
     pages: [
       {

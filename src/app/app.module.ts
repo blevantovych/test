@@ -6,8 +6,8 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { SurveyComponent } from "./survey.component";
-import { SurveyCreatorComponent } from "./survey.creator.component";
-import { SurveyAnalyticsComponent } from "./survey.analytics.component";
+// import { SurveyCreatorComponent } from "./survey.creator.component";
+// import { SurveyAnalyticsComponent } from "./survey.analytics.component";
 import { BranchingComponent } from "./surveys/branching/branching.component";
 import { SingleQuestionComponent } from "./surveys/single-question/single-question.component";
 import { MultipleQuestionsComponent } from "./surveys/multiple-questions/multiple-questions.component";
@@ -16,14 +16,18 @@ import { OnlyOneAnswerComponent } from "./surveys/only-one-answer/only-one-answe
 import { CaptureRecordsComponent } from "./surveys/capture-records/capture-records.component";
 import { PredefinedConditionsComponent } from "./surveys/predefined-conditions/predefined-conditions.component";
 import { InputParametersComponent } from "./surveys/input-parameters/input-parameters.component";
+import { PreviousQuestionComponent } from "./surveys/previous-question/previous-question.component";
+import { ChangeStyling } from "./surveys/change-styling/change-styling.component";
+
 import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
-    SurveyCreatorComponent,
-    SurveyAnalyticsComponent,
+    // SurveyCreatorComponent,
+    // SurveyAnalyticsComponent,
+    PreviousQuestionComponent,
     BranchingComponent,
     SingleQuestionComponent,
     MultipleQuestionsComponent,
@@ -31,7 +35,8 @@ import { AppRoutingModule } from "./app-routing.module";
     OnlyOneAnswerComponent,
     CaptureRecordsComponent,
     PredefinedConditionsComponent,
-    InputParametersComponent
+    InputParametersComponent,
+    ChangeStyling
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

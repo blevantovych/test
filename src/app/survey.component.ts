@@ -8,29 +8,32 @@ import {
   OnChanges
 } from "@angular/core";
 import * as Survey from "survey-angular";
-import * as widgets from "surveyjs-widgets";
-import * as SurveyPDF from "survey-pdf";
-import "inputmask/dist/inputmask/phone-codes/phone.js";
+// import * as widgets from "surveyjs-widgets";
+// import * as SurveyPDF from "survey-pdf";
+// import "inputmask/dist/inputmask/phone-codes/phone.js";
 
-widgets.icheck(Survey);
-widgets.select2(Survey);
-widgets.inputmask(Survey);
-widgets.jquerybarrating(Survey);
-widgets.jqueryuidatepicker(Survey);
-widgets.nouislider(Survey);
-widgets.select2tagbox(Survey);
-widgets.signaturepad(Survey);
-widgets.sortablejs(Survey);
-widgets.ckeditor(Survey);
-widgets.autocomplete(Survey);
-widgets.bootstrapslider(Survey);
-widgets.prettycheckbox(Survey);
+// widgets.icheck(Survey);
+// widgets.select2(Survey);
+// widgets.inputmask(Survey);
+// widgets.jquerybarrating(Survey);
+// widgets.jqueryuidatepicker(Survey);
+// widgets.nouislider(Survey);
+// widgets.select2tagbox(Survey);
+// widgets.signaturepad(Survey);
+// widgets.sortablejs(Survey);
+// widgets.ckeditor(Survey);
+// widgets.autocomplete(Survey);
+// widgets.bootstrapslider(Survey);
+// widgets.prettycheckbox(Survey);
 //widgets.emotionsratings(Survey);
 
 Survey.JsonObject.metaData.addProperty("questionbase", "popupdescription:text");
 Survey.JsonObject.metaData.addProperty("page", "popupdescription:text");
-
-Survey.StylesManager.applyTheme("default");
+console.log(Survey.StylesManager.ThemeColors);
+var defaultThemeColors = Survey.StylesManager.ThemeColors["modern"];
+defaultThemeColors["$main-color"] = "#E87E37";
+defaultThemeColors["$main-hover-color"] = "#f1b287";
+Survey.StylesManager.applyTheme("modern");
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -43,10 +46,11 @@ Survey.StylesManager.applyTheme("default");
 })
 export class SurveyComponent implements OnInit, OnChanges {
   @Output() submitSurvey = new EventEmitter<any>();
+  @Output() onNextPage = new EventEmitter<any>();
   @Input() inputParams;
   @Input() page;
-  @Input()
-  json: object;
+  @Input() mainColor;
+  @Input() json: object;
   result: any;
   surveyModel;
   ngOnChanges(changes: SimpleChanges) {
@@ -55,12 +59,10 @@ export class SurveyComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.inputParams);
-
     this.surveyModel = new Survey.Model(this.json);
-    this.surveyModel.data = {
-      ...this.inputParams
-    };
+    this.surveyModel.data = this.inputParams;
+    this.surveyModel.sendResultOnPageNext = true;
+
     this.surveyModel.currentPageNo = this.page - 1;
     this.surveyModel.onAfterRenderQuestion.add((survey, options) => {
       if (!options.question.popupdescription) {
@@ -84,6 +86,9 @@ export class SurveyComponent implements OnInit, OnChanges {
       this.submitSurvey.emit(result.data);
       this.result = result.data;
     });
+    this.surveyModel.onPartialSend.add(result => {
+      this.onNextPage.emit(result);
+    });
     Survey.SurveyNG.render("surveyElement", { model: this.surveyModel });
   }
   savePDF() {
@@ -96,9 +101,9 @@ export class SurveyComponent implements OnInit, OnChanges {
         bot: 10
       }
     };
-    const surveyPDF = new SurveyPDF.SurveyPDF(this.json, options);
-    console.log(this.result);
-    surveyPDF.data = this.result;
-    surveyPDF.save("survey PDF example");
+    // const surveyPDF = new SurveyPDF.SurveyPDF(this.json, options);
+    // console.log(this.result);
+    // surveyPDF.data = this.result;
+    // surveyPDF.save("survey PDF example");
   }
 }
